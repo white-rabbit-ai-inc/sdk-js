@@ -4,7 +4,7 @@
   "description": "javascript sdk for white rabbit intel",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage --forceExit"
   },
   "repository": {
     "type": "git",
