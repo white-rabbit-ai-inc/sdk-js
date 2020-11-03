@@ -1,0 +1,33 @@
+{
+  "name": "whiterabbitintel.js",
+  "version": "1.0.0",
+  "description": "javascript sdk for white rabbit intel",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/white-rabbit-ai-inc/sdk-js.git"
+  },
+  "keywords": [
+    "white",
+    "rabbit",
+    "intel",
+    "sdk",
+    "javascript",
+    "ai",
+    "aiaas"
+  ],
+  "author": "Tim Gosnell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/white-rabbit-ai-inc/sdk-js/issues"
+  },
+  "homepage": "https://github.com/white-rabbit-ai-inc/sdk-js#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.12.1",
+    "jest": "^26.6.2",
+    "webpack": "^5.4.0"
+  }
+}
