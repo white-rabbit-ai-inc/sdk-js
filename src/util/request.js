@@ -17,7 +17,7 @@
 //     return result
 // }
 
-const request = async (connection, params, data,id) => {
+const request = async (connection, params, data) => {
     if(connection.apiKey == undefined)
         throw new Error('no apiKey set - please refer to the config module')
     if(params.method === undefined)
@@ -28,8 +28,15 @@ const request = async (connection, params, data,id) => {
     let fetchOptions = {
         method: params.method,
     }
-    if(params.method === 'GET'){
-        url += `/${id}` 
+    if(params.method === 'GET' && params.id){
+        url += `/${params.id}` 
+    }
+    else if(params.method === 'GET' && params.queries){
+        // url += `/${id}`
+        for (const [key, value] of Object.entries(params.queries)) {
+            url += url.includes('?') ? `&` : `?`
+            url +=  `${key}=${value}`
+        }; 
     }
     if(params.method === 'POST'){
         fetchOptions.data = data

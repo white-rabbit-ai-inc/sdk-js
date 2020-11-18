@@ -12,7 +12,12 @@ requests[PROCESSING_TYPES.MATCH] = {
     url: `/match`
 };
 
+const getType = (type) => {
+    return requests[type]
+}
+
 module.exports = {
     PROCESSING_TYPES: PROCESSING_TYPES,
-    requests: requests
+    requests: requests,
+    getType: getType
   };
