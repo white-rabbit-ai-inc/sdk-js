@@ -1,49 +1,60 @@
 
-// import config from '../config'
-
-// const createRequest = (params, data) => {
-//     if(config.getConfig().apiKey == undefined)
-//         throw new Error('no apiKey set - please refer to the config module')
-//     let baseUrl = config.getConfig().environment.url
-//     let result = await axios.post(`${baseUrl}${params.endPoint}`, data)
-//     return result
-// }  
-
-// const fetchRequest = (id) => {
-//     if(config.getConfig().apiKey == undefined)
-//         throw new Error('no apiKey set - please refer to the config module')
-//     let baseUrl = config.getConfig().environment.url
-//     let result = await axios.get(`${baseUrl}${params.endPoint}/${id}`)
-//     return result
-// }
+import axios from 'axios'
+import fetch from 'node-fetch'
 
 const request = async (connection, params, data) => {
-    if(connection.apiKey == undefined)
+    if(connection.apiKey === undefined)
         throw new Error('no apiKey set - please refer to the config module')
     if(params.method === undefined)
         throw new Error('no method defined')
-    params.method = params.method.toUpperCase() 
+
+    params.method = params.method.toLowerCase() 
+    let isFile = !!params.file
+    let isDataPost = params.method === 'post' && !isFile
+
+    
+    
     let url = `${connection.environment.url}${params.endPoint}`
     
-    let fetchOptions = {
+    let options = {
         method: params.method,
     }
-    if(params.method === 'GET' && params.id){
+    if(params.method === 'get' && params.id){
         url += `/${params.id}` 
     }
-    else if(params.method === 'GET' && params.queries){
+    else if(params.method === 'get' && params.queries){
         // url += `/${id}`
         for (const [key, value] of Object.entries(params.queries)) {
             url += url.includes('?') ? `&` : `?`
             url +=  `${key}=${value}`
         }; 
     }
-    if(params.method === 'POST'){
-        fetchOptions.data = data
+
+    if(isDataPost){
+        options.body = JSON.stringify(data)
     }
+
+    if(isFile){
+        options.body = data
+        options.headers = {
+            "Content-length": params.contentLength
+        }
+    }
+
+
+    console.log('url',url)
+    console.log('options',options)
     
-    let result = await fetch(url,fetchOptions)
+    let result = await fetch(url,options)
     return result.json()
+
+    /*
+     options.url = url
+
+    
+    let result = await axios(options)
+    return result
+    */
 }
 
 export default request

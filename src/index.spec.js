@@ -10,11 +10,19 @@ describe('test base has each object defined', () => {
         expect(base.config).not.toBe(undefined)
     })
 
+    test('data not undef', () => {
+        expect(base.data).not.toBe(undefined)
+    })
+
     test('processing not undef', () => {
         expect(base.processing).not.toBe(undefined)
     })
 
     test('user not undef', () => {
         expect(base.user).not.toBe(undefined)
+    })
+
+    test('version not undef', () => {
+        expect(base.version).not.toBe(undefined)
     })
 })
