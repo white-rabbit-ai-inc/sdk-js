@@ -41,20 +41,18 @@ const request = async (connection, params, data) => {
         }
     }
 
-
-    console.log('url',url)
+    options.headers = {
+        "access-key": process.env.WRI_ACCESS_KEY,
+        "x-api-key": process.env.WRI_API_KEY
+    }
+    // console.log('url',url)
     console.log('options',options)
     
     let result = await fetch(url,options)
-    return result.json()
-
-    /*
-     options.url = url
-
-    
-    let result = await axios(options)
+    if(result.status !== 200){
+        throw new Error(result.statusText)
+    }
     return result
-    */
 }
 
 export default request

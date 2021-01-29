@@ -7,11 +7,11 @@ const ENVIRONMENT_TYPES = Object.freeze({
 const requests = {};
 
 requests[ENVIRONMENT_TYPES.PRODUCTION] = {
-    url: 'http://api.whiterabbitintel.com'
+    url: 'https://api.whiterabbitintel.com'
 };
 
 requests[ENVIRONMENT_TYPES.STAGING] = {
-    url: 'http://staging-api.whiterabbitintel.com'
+    url: 'https://staging-api.whiterabbitintel.com'
 };
 
 const config = {

@@ -5,13 +5,13 @@ import request from '../util/request'
 const data = {
     upload: async (connection, params, stream) => {
 
-        // const requestUrl = 
         console.log(connection)
         try {
-            const url = await request(connection, { method: 'POST', endPoint: '/processing/url' }, { contentType: params.contentType })
+            const response = await request(connection, { method: 'GET', endPoint: '/processing/url' })
+            
+            let url = await response.json()
 
-            // console.log('url', url)
-            // console.log(stream)
+            console.log('url',new URL(url.uploadUrl))
 
             let result = await fetch(url.uploadUrl, {
                 method: 'PUT',
@@ -26,7 +26,7 @@ const data = {
             return result;
         }
         catch (e) {
-            console.log(e)
+            console.error(`Error! ${e.message}`)
         }
        
     }
