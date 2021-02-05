@@ -1,6 +1,6 @@
 
 
-import request from '../util/request'
+import { request } from '../util/request'
 
 const data = {
     upload: async (connection, params, stream) => {

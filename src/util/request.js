@@ -2,7 +2,7 @@
 import axios from 'axios'
 import fetch from 'node-fetch'
 
-const request = async (connection, params, data) => {
+export const request = async (connection, params, data) => {
     if(connection.apiKey === undefined)
         throw new Error('no apiKey set - please refer to the config module')
     if(params.method === undefined)
@@ -17,7 +17,7 @@ const request = async (connection, params, data) => {
     let url = `${connection.environment.url}${params.endPoint}`
     
     let options = {
-        method: params.method,
+        method: params.method.toUpperCase(),
     }
     if(params.method === 'get' && params.id){
         url += `/${params.id}` 
@@ -49,10 +49,9 @@ const request = async (connection, params, data) => {
     console.log('options',options)
     
     let result = await fetch(url,options)
+    console.log(result)
     if(result.status !== 200){
-        throw new Error(result.statusText)
+        console.error(result)
     }
     return result
 }
-
-export default request

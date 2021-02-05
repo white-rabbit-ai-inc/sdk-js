@@ -6,10 +6,14 @@ const PROCESSING_TYPES = Object.freeze({
 
 const requests = {};
 requests[PROCESSING_TYPES.PROFILE] = {
-    url: `/profile`
+    name: 'profile',
+    url: '/processing',
+    schema: 'profile.json'
 }
 requests[PROCESSING_TYPES.MATCH] = {
-    url: `/match`
+    name:'match',
+    url: '/processing',
+    schema: 'match.json'
 };
 
 const getType = (type) => {

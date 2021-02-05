@@ -1,0 +1,20 @@
+{
+    "fileUuid": "03bdb79a-2f71-11eb-adc1-0242ac120002",
+    "fileName": "",
+    "fileType":"",
+    "fileSize":"",
+    "itemCount":"",
+    "dataType": "",
+    "fileMappings": { 
+        "email":"joeschmoe@something.com"
+    },
+    "winMapping": "",
+    "profileUuid": "",
+    "userId": "03bdc028-2f71-11eb-adc1-0242ac120002",
+    "accountId": "03bdc636-2f71-11eb-adc1-0242ac120002",
+    "skipAugment": false,
+    
+    "dataSource:":"",
+    "productService": "",
+    "processingType": ""
+}

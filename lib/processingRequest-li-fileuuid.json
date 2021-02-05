@@ -1,0 +1,9 @@
+{
+    "fileUuid": "03bdb79a-2f71-11eb-adc1-0242ac120002",
+    "fileName": "testFile-01",
+    "dataType": "application/json",
+    "fileMappings": { 
+        "linkedinUrl": "profile"
+    },
+    "winMapping": ""
+}

@@ -2,7 +2,6 @@ import fs from 'fs'
 import data from '../../src/data'
 import config from '../../src/config'
 
-
 fetch.dontMock() 
 fetch.disableMocks()
 
