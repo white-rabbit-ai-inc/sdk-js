@@ -45,18 +45,8 @@ const processing = {
             let msg = `the data provided does not meet requirements for a  request ${type.name}`
             return `{ "message" : ${msg} }`
         }
-        // return await UrlRequest(connection, { method: 'POST', endPoint: type.url }, data)
         
         console.log('http://staging-api.whiterabbitintel.com/processing')
-        // let result = await fetch(connection.environment.url + type.url, {
-        //     method: 'POST',
-        //     headers: {
-        //         "Content-Type": 'text/plain',
-        //         "access-key": process.env.WRI_ACCESS_KEY,
-        //          "x-api-key": process.env.WRI_API_KEY
-        //     },
-        //     body: data // Here, stringContent or bufferContent would also work
-        // })
 
         let params = {
             method: 'POST',
@@ -69,7 +59,7 @@ const processing = {
         }
 
         console.log('params',params)
-        let result = await fetch('http://staging-api.whiterabbitintel.com/processing', {})
+        let result = await fetch('https://staging-api.whiterabbitintel.com/processing', params)
 
         return result
         
