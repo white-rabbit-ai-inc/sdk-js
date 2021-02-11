@@ -19,7 +19,9 @@ const schema = Object.freeze({
 })
 
 const processing = {
-    
+    getType: (typeName) => {
+        return types.getType(typeName)
+    },
     getProcessingTypes: () => {
         return types.PROCESSING_TYPES
     },

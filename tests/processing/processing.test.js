@@ -1,10 +1,5 @@
 import fs from 'fs'
-import data from '../../src/data'
-import config from '../../src/config'
-
-import processing from '../../src/processing'
-import types from '../../src/processing/types'
-
+import { data , config, processing } from '../../src'
 
 fetch.dontMock()
 fetch.disableMocks()
@@ -25,7 +20,6 @@ describe('integration testing processing request', () => {
         const stats = fs.statSync('lib/test.json');
         const fileSizeInBytes = stats.size;
         const file = fs.readFileSync('lib/test.json');
-        // let readStream = fs.createReadStream('lib/test.json');
 
         let result = await data.upload(connection, { contentType: contentType, contentLength: fileSizeInBytes }, file)
         console.log('result', result)
@@ -35,7 +29,7 @@ describe('integration testing processing request', () => {
 
         let uuid = url.pathname.replace('/uploads/','')
 
-        let type = types.getType(types.PROCESSING_TYPES.PROFILE)
+        let type = processing.getType('PROFILE')
         let base = {
             fileUuid: uuid,
             fileName: 'Testing sdk',
