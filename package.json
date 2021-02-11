@@ -1,5 +1,5 @@
 {
-  "name": "whiterabbitintel.js",
+  "name": "wri-sdk.js",
   "version": "1.0.0",
   "description": "javascript sdk for white rabbit intel",
   "main": "index.js",
