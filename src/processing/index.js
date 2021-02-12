@@ -2,7 +2,7 @@
 import jsonschema from 'jsonschema'
 
 import types from './types'
-import { request as UrlRequest } from '../util/request'
+import { request as req } from '../util/request'
 
 import validateData from '../util/validator'
 import baseSchema from '../../schema/processingRequest.json'
@@ -35,8 +35,8 @@ const processing = {
         let results = {
             message: 'error requesting processing'
         }
-        if(!data.type){
-            data.type = type.nme
+        if(!data.processingType){
+            data.processingType = type.name
         }
 
         if(!await validateData(baseSchema, data))
@@ -47,21 +47,13 @@ const processing = {
             let msg = `the data provided does not meet requirements for a  request ${type.name}`
             return `{ "message" : ${msg} }`
         }
-        
-        console.log('http://staging-api.whiterabbitintel.com/processing')
 
         let params = {
             method: 'POST',
-            body: JSON.stringify(data),
-            headers: { 
-                'Content-Type': 'application/json',
-                "access-key": process.env.WRI_ACCESS_KEY,
-                "x-api-key": process.env.WRI_API_KEY
-             }
+            endPoint: type.url
         }
 
-        console.log('params',params)
-        let result = await fetch('https://staging-api.whiterabbitintel.com/processing', params)
+        let result = await req(connection,params, data)
 
         return result
         

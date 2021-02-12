@@ -14,7 +14,7 @@ describe('integration testing processing request', () => {
     test('test upload', async () => {
         let contentType = 'application/json'
 
-        const connection = config.init({ apiKey: '1234' })
+        const connection = config.init()
         connection.setEnvironment(config.ENVIRONMENT_TYPES.STAGING)
 
         const stats = fs.statSync('lib/test.json');
@@ -29,7 +29,7 @@ describe('integration testing processing request', () => {
 
         let uuid = url.pathname.replace('/uploads/','')
 
-        let type = processing.getType('PROFILE')
+        let type = await processing.getType('PROFILE')
         let base = {
             fileUuid: uuid,
             fileName: 'Testing sdk',
