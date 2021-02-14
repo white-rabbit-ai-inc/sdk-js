@@ -30,14 +30,13 @@ describe('integration testing processing request', () => {
         let uuid = url.pathname.replace('/uploads/','')
 
         let type = await processing.getType('PROFILE')
-        let base = {
+        
+        let payload = {
             fileUuid: uuid,
             fileName: 'Testing sdk',
             fileType: 'application/json',
             dataType: 'win/loss',
-            processingType: type.name
-        }
-        let profileData = {
+            processingType: type.name,
             fileMappings: { 
                 firstname: "firstname",
                 lastname: "lastname",
@@ -46,9 +45,8 @@ describe('integration testing processing request', () => {
             },
             winMapping:"true",
             dataSource:"spreadsheet",
-            productService: "TiR"
+            productService: "product1"
         }
-        let payload = {...base, ...profileData}
         console.log(payload)
         let processingResult = await processing.request(connection,type, payload )
         console.log(processingResult)
