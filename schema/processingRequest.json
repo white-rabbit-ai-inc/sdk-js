@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://whiterabbitintel.com/processingRequest.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "examples": [
+        {
+            "fileName": "",
+            "fileType": "",
+            "dataType": "",
+            "processingType": ""
+        }
+    ],
+    "required": [
+        "fileName",
+        "fileType",
+        "dataType",
+        "processingType"
+    ],
+    "oneOf": [
+        {
+            "required": [
+                "data"
+            ]
+        },
+        {
+            "required": [
+                "fileUuid"
+            ]
+        }
+    ],
+    "properties": {
+        "fileName": {
+            "$id": "#/properties/fileName",
+            "type": "string",
+            "title": "The fileName schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "fileType": {
+            "$id": "#/properties/fileType",
+            "type": "string",
+            "title": "The fileType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "dataType": {
+            "$id": "#/properties/dataType",
+            "type": "string",
+            "title": "The dataType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "processingType": {
+            "$id": "#/properties/processingType",
+            "type": "string",
+            "title": "The processingType schema",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        }
+    },
+    "additionalProperties": true
+}

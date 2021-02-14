@@ -1,23 +1,30 @@
 
-const PROCESSING_TYPES = Object.freeze({
-    PROFILE: Symbol('PROFILE'),
-    MATCH: Symbol('MATCH')
-});
+import config from '../config'
+import { request } from '../util/request'
 
-const requests = {};
-requests[PROCESSING_TYPES.PROFILE] = {
-    url: `/profile`
+let types = {};
+
+const getType = async (type) => {
+    let keys = Object.keys(types)
+    if(keys.length == 0){
+        types = await getTypes()
+        keys = Object.keys(types)
+    }
+    if(!keys.includes(type))
+        throw new Error('Invalid Processing Type')
+    return types[type]
 }
-requests[PROCESSING_TYPES.MATCH] = {
-    url: `/match`
-};
 
-const getType = (type) => {
-    return requests[type]
+const getTypes = async () => {
+    const connection = config.init()
+
+    //query for types and return result
+    let response = await request(connection,{ method: 'GET', endPoint:'/processing?types'})
+    let result = await response.json()
+    return result.types
 }
 
 module.exports = {
-    PROCESSING_TYPES: PROCESSING_TYPES,
-    requests: requests,
+    types: types,
     getType: getType
   };

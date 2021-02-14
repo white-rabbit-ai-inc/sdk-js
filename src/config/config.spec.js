@@ -1,5 +1,5 @@
 
-import config from '.'
+import config, { requests } from '.'
 
 describe('test config', () => {
     test('api key undef',() => {
@@ -14,13 +14,13 @@ describe('test config', () => {
     })
 
     test('set env',() => {
-        config.setEnvironment(config.ENVIRONMENT_TYPES.SANDBOX)
+        config.setEnvironment(config.ENVIRONMENT_TYPES.STAGING)
         expect(config.environment).not.toBe(undefined) 
-        expect(config.environment).toBe(config.ENVIRONMENT_TYPES.SANDBOX) 
+        expect(config.environment).toBe(config.requests[config.ENVIRONMENT_TYPES.STAGING]) 
     })
 
     test('get config',() => {
-        expect(config.init({apiKey: '1234', environment: config.ENVIRONMENT_TYPES.SANDBOX})).not.toBe(undefined) 
+        expect(config.init({apiKey: '1234', environment: config.ENVIRONMENT_TYPES.STAGING})).not.toBe(undefined) 
         expect(config.init()).toHaveProperty('environment') 
         expect(config.init()).toHaveProperty('apiKey') 
     })

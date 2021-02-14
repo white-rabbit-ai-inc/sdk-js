@@ -1,36 +1,71 @@
 
+import jsonschema from 'jsonschema'
+
 import types from './types'
-import request from '../util/request'
+import { request as req } from '../util/request'
+
+import validateData from '../util/validator'
+import baseSchema from '../../schema/processingRequest.json'
+import profileSchema from '../../schema/profile.json'
+import matchSchema from '../../schema/match.json'
+
+import fetch from 'node-fetch'
+
+const schema = Object.freeze({
+    
+        'profile.json': profileSchema,
+        'match.json': matchSchema
+    
+})
 
 const processing = {
+    getType: (typeName) => {
+        return types.getType(typeName)
+    },
     getProcessingTypes: () => {
         return types.PROCESSING_TYPES
     },
-    request: async (connection,type, dataId, data) => {
-        if(!type) {
+    request: async (connection, type, data) => {
+        if (!type) {
             throw new Error('request type is required')
         }
-        if(!dataId && !data){
-            throw new Error('data or dataId required to process data')
+        if (!data) {
+            throw new Error('no payload found - request parameters required to process data')
         }
         let results = {
             message: 'error requesting processing'
         }
-        
-        let requestObj = types.getType(type);
-        
-        results = await request(connection, { method: 'POST', endPoint:requestObj.url, dataId: dataId},data)
+        if(!data.processingType){
+            data.processingType = type.name
+        }
 
-        return results;
+        if(!await validateData(baseSchema, data))
+            return '{ "message" : "the data provided does not meet minimum requirements" }'
+    
+        let typeSchema = schema[type.schema]
+        if(!await validateData(typeSchema, data)){
+            let msg = `the data provided does not meet requirements for a  request ${type.name}`
+            return `{ "message" : ${msg} }`
+        }
+
+        let params = {
+            method: 'POST',
+            endPoint: type.url
+        }
+
+        let result = await req(connection,params, data)
+
+        return result
+        
     },
-    getResults: async  (connection,type,requestId) => {
+    getResults: async (connection, type, requestId) => {
         let results = {
             message: 'error requesting processing'
         }
-        
+
         let requestObj = types.getType(type);
-        
-        results = await request(connection, { method: 'GET', id: requestId, endPoint:requestObj.url})
+
+        results = await request(connection, { method: 'GET', id: requestId, endPoint: requestObj.url })
 
         return results;
     }

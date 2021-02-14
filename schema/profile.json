@@ -1,0 +1,191 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://www.whiterabbitintel.com/profile.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "examples": [
+        {
+            "fileMappings": {
+                "firstname": "Boba",
+                "lastname": "Fett",
+                "company": "Fett Bounties, Inc",
+                "win": "captured"
+            },
+            "winMapping": "true",
+            "dataSource": "Empire CRM",
+            "productService": "Track and Catch"
+        }
+    ],
+    "required": [
+        "fileMappings",
+        "winMapping",
+        "dataSource",
+        "productService"
+    ],
+    "properties": {
+        "fileMappings": {
+            "$id": "#/properties/fileMappings",
+            "type": "object",
+            "title": "Data mappings for this data request",
+            "description": "file mappings are explict field to field mappings from one data set to another (i.e in a non-WRI data set 'First Name' -> in the WRI dataset'firstname'",
+            "default": {},
+            "examples": [
+                {
+                    "email": "joeschmoe@something.com"
+                }
+            ],
+            "anyOf": [
+                {
+                    "required": [
+                        "email"
+                    ]
+                },
+                {
+                    "required": [
+                        "linkedinUrl"
+                    ]
+                },
+                {
+                    "required": [
+                        "firstname",
+                        "lastname",
+                        "company"
+                    ]
+                }
+            ],
+            "properties": {
+                "items": {
+                    "anyOf": [
+                        {
+                            "email": {
+                                "$id": "#/properties/winMapping/properties/email",
+                                "type": "string",
+                                "title": "The email field mapping",
+                                "description": "the name of the email field in the incoming dataset",
+                                "default": "",
+                                "examples": [
+                                    "joeschmoe@something.com"
+                                ]
+                            }
+                        },
+                        {
+                            "linkedinUrl": {
+                                "$id": "#/properties/winMapping/properties/linkedinUrl",
+                                "type": "string",
+                                "title": "The linkedinUrl mapping",
+                                "description": "the name of the linkedin url field in the incoming dataset",
+                                "default": "",
+                                "examples": [
+                                    "https://www.linkedin.com/in/somepeoplecallmetim/"
+                                ]
+                            }
+                        },
+                        {
+                            "firstname": {
+                                "$id": "#/properties/winMapping/properties/firstname",
+                                "type": "string",
+                                "title": "The firstname field mapping",
+                                "description": "the name of the first name field in the incoming dataset",
+                                "default": "",
+                                "examples": [
+                                    "First Name"
+                                ]
+                            },
+                            "lastname": {
+                                "$id": "#/properties/winMapping/properties/lastname",
+                                "type": "string",
+                                "title": "The lastname field mapping",
+                                "description": "the name of the last name field in the incoming dataset",
+                                "default": "",
+                                "examples": [
+                                    "Last Name"
+                                ]
+                            },
+                            "company": {
+                                "$id": "#/properties/winMapping/properties/company",
+                                "type": "string",   
+                                "title": "The company field mapping",
+                                "description": "the name of the company field in the incoming dataset",
+                                "default": "",
+                                "examples": [
+                                    "Company Name"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": true
+        },
+        "winMapping": {
+            "$id": "#/properties/winMapping",
+            "type": "string",
+            "title": "Win or Advancement value",
+            "description": "the specific data value that indicates an advancement of win",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "dataSource": {
+            "$id": "#/properties/dataSource",
+            "type": "string",
+            "title": "The Data Source (Hubspot, SalesForce, SAP, Oracle, Dynamics)",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "productService": {
+            "$id": "#/properties/productService",
+            "type": "string",
+            "title": "The Product/Service name",
+            "description": "An explanation about the purpose of this instance.",
+            "default": "",
+            "examples": [
+                ""
+            ]
+        },
+        "data": {
+            "$id": "#/properties/data",
+            "type": "array",
+            "title": "The data",
+            "description": "Data to process against the reference data when a file uuid is not present",
+            "default": [],
+            "examples": [
+                [
+                    {
+                        "firstname": "",
+                        "lastname": "",
+                        "company": ""
+                    },
+                    {
+                        "firstname": "",
+                        "lastname": "",
+                        "company": ""
+                    }
+                ]
+            ],
+            "additionalItems": true,
+            "items": {
+                "$id": "#/properties/data/items",
+                "anyOf": [
+                    {
+                        "$id": "#/properties/data/items/anyOf/0",
+                        "type": "object",
+                        "title": "The first anyOf schema",
+                        "description": "An explanation about the purpose of this instance.",
+                        "default": {},
+                        "examples": [
+                            {}
+                        ],
+                        "required": [],
+                        "additionalProperties": true
+                    }
+                ]
+            }
+        }
+    }
+}

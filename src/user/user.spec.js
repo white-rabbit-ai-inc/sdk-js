@@ -77,7 +77,7 @@ describe('test user errors', () => {
         expect(result.req.parsedURL.query).toBe('id=1111')
     })
 
-    test('test getUser with email', async () => {
+    test('test getUser with no email or id', async () => {
         let mockResponse = {
             id: '1234',
             email: 'foo@bar.com'
