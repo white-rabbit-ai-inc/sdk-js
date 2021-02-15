@@ -14,7 +14,7 @@ requests[ENVIRONMENT_TYPES.STAGING] = {
     url: 'https://staging-api.whiterabbitintel.com'
 };
 
-const config = {
+const connection = {
     ENVIRONMENT_TYPES: ENVIRONMENT_TYPES,
     requests: requests,
     environment: requests[ENVIRONMENT_TYPES.STAGING],
@@ -37,7 +37,7 @@ const setEnvironment = function(env) {
     this.environment = requests[env]
 }
 
-config.setKey = setKey
-config.setEnvironment = setEnvironment    
+connection.setKey = setKey
+connection.setEnvironment = setEnvironment    
 
-export default config
+export default connection

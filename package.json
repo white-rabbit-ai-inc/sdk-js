@@ -27,9 +27,11 @@
   "homepage": "https://github.com/white-rabbit-ai-inc/sdk-js#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
+    "jaguarjs-jsdoc": "^1.1.0",
     "jest": "^26.6.2",
     "jest-fetch-mock": "^3.0.3",
     "jest-mock-axios": "^4.2.1",
+    "jsdoc": "^3.6.6",
     "webpack": "^5.4.0"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { data , config, processing } from '../../src'
+import { data , connection, processing } from '../../src'
 
 fetch.dontMock()
 fetch.disableMocks()
@@ -14,14 +14,14 @@ describe('integration testing processing request', () => {
     test('test upload', async () => {
         let contentType = 'application/json'
 
-        const connection = config.init()
-        connection.setEnvironment(config.ENVIRONMENT_TYPES.STAGING)
+        const conn = connection.init()
+        conn.setEnvironment(connection.ENVIRONMENT_TYPES.STAGING)
 
         const stats = fs.statSync('lib/test.json');
         const fileSizeInBytes = stats.size;
         const file = fs.readFileSync('lib/test.json');
 
-        let result = await data.upload(connection, { contentType: contentType, contentLength: fileSizeInBytes }, file)
+        let result = await data.upload(conn, { contentType: contentType, contentLength: fileSizeInBytes }, file)
         console.log('result', result)
 
         let url = new URL(result.url)
@@ -48,7 +48,7 @@ describe('integration testing processing request', () => {
             productService: "product1"
         }
         console.log(payload)
-        let processingResult = await processing.request(connection,type, payload )
+        let processingResult = await processing.request(conn,type, payload )
         console.log(processingResult)
     })
 })

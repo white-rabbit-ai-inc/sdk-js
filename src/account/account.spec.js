@@ -1,7 +1,7 @@
 import { enableFetchMocks } from 'jest-fetch-mock'
 
 import account from './'
-import config from '../config'
+import connection from '../connection'
 
 enableFetchMocks()
 
@@ -22,11 +22,12 @@ describe('test account errors', () => {
             ]
         }))
 
-        const connection = config.init({ apiKey: '1234' })
-        let response = await account.getAccount(connection);
+        const conn = connection.init({ apiKey: '1234' })
+        let response = await account.getAccount(conn);
         console.log('response', response)
-        expect(response.accounts).not.toBe(undefined)
-        expect(response.accounts.length).toBe(1)
+        let result  = await response.json()
+        expect(result).not.toBe(undefined)
+        expect(result.accounts.length).toBe(1)
     })
 
     //  test('test getAccounts returns error',() => {

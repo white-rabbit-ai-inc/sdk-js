@@ -1,5 +1,5 @@
 
-import config from '../config'
+import connection from '../connection'
 import { request } from '../util/request'
 
 let types = {};
@@ -16,10 +16,10 @@ const getType = async (type) => {
 }
 
 const getTypes = async () => {
-    const connection = config.init()
+    const conn = connection.init()
 
     //query for types and return result
-    let response = await request(connection,{ method: 'GET', endPoint:'/processing?types'})
+    let response = await request(conn,{ method: 'GET', endPoint:'/processing?types'})
     let result = await response.json()
     return result.types
 }

@@ -2,7 +2,7 @@
 import { enableFetchMocks } from 'jest-fetch-mock'
 
 import user from './'
-import config from '../config'
+import connection from '../connection'
 
 enableFetchMocks()
 
@@ -31,8 +31,9 @@ describe('test user errors', () => {
             ]
         }))
 
-        const connection = config.init({ apiKey: '1234' })
-        let response = await user.getUsers(connection);
+        const conn = connection.init({ apiKey: '1234' })
+        let response = await(await user.getUsers(conn)).json();
+
         console.log('response', response)
         expect(response.users).not.toBe(undefined)
         expect(response.users.length).toBe(4)
@@ -44,8 +45,8 @@ describe('test user errors', () => {
             email: 'foo@bar.com'
         }
         fetch.mockResponse(JSON.stringify(mockResponse))
-        const connection = config.init({ apiKey: '1234' })
-        let response = await user.getUser(connection, undefined,'foo@bar.com');
+        const conn = connection.init({ apiKey: '1234' })
+        let response = await(await user.getUser(conn, undefined,'foo@bar.com')).json();
         expect(response.id).toBe('1234')
         expect(response.email).toBe('foo@bar.com')
     })
@@ -67,8 +68,8 @@ describe('test user errors', () => {
                 return new Promise(resolve => setTimeout(() => resolve(JSON.stringify({ req: req, response: mockResponse })), 100))
             }
         )
-        const connection = config.init({ apiKey: '1234' })
-        let result = await user.getUser(connection,'1111');
+        const conn = connection.init({ apiKey: '1234' })
+        let result = await(await user.getUser(conn,'1111')).json();
         let response = result.response
 
         // console.log(result)
@@ -83,9 +84,9 @@ describe('test user errors', () => {
             email: 'foo@bar.com'
         }
         fetch.mockResponse(JSON.stringify(mockResponse))
-        const connection = config.init({ apiKey: '1234' })
+        const conn = connection.init({ apiKey: '1234' })
         try {
-            await user.getUser(connection);
+            await user.getUser(conn);
         }
         catch(e){
             expect(e.message).toBe('id or email required to fetch a user record')

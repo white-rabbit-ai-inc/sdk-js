@@ -4,7 +4,7 @@ import fetch from 'node-fetch'
 
 export const request = async (connection, params, data) => {
     // if(connection.apiKey === undefined)
-    //     throw new Error('no apiKey set - please refer to the config module')
+    //     throw new Error('no apiKey set - please refer to the connection module')
     if(params.method === undefined)
         throw new Error('no method defined')
 

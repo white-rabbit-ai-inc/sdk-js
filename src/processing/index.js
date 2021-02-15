@@ -44,7 +44,7 @@ const processing = {
     
         let typeSchema = schema[type.schema]
         if(!await validateData(typeSchema, data)){
-            let msg = `the data provided does not meet requirements for a  request ${type.name}`
+            let msg = `the data provided does not meet requirements for a ${type.name} request`
             return `{ "message" : ${msg} }`
         }
 
@@ -65,7 +65,7 @@ const processing = {
 
         let requestObj = types.getType(type);
 
-        results = await request(connection, { method: 'GET', id: requestId, endPoint: requestObj.url })
+        results = await req(connection, { method: 'GET', id: requestId, endPoint: requestObj.url })
 
         return results;
     }

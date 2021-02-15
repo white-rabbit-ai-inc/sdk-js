@@ -2,7 +2,18 @@
 
 import { request } from '../util/request'
 
+/**
+ * data module
+ * @module
+ */
 const data = {
+    /**
+     * Blend two colors together.
+     * @param {string} connection - A connection object.
+     * @param {string} params - The second color, in hexadecimal format.
+     * @param {string} stream - a NodeJS file stream 
+     * @return {string} The blended color.
+     */
     upload: async (connection, params, stream) => {
 
         console.log(connection)
