@@ -6,9 +6,6 @@
 [![NPM downloads](https://img.shields.io/npm/dm/wri-sdk.svg)](https://www.npmjs.com/package/wri-sdk)
 [![Build Status](https://circleci.com/gh/white-rabbit-ai-inc/sdk-js.svg?style=shield)](https://app.circleci.com/pipelines/github/white-rabbit-ai-inc/sdk-js)
 
-<!-- [![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js) -->
-<!-- [![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js) -->
-
 ## Version 1.x Now Available
 The [version 1.x](https://github.com/white-rabbit-ai-inc/sdk-js) of the WRI JavaScript SDK generally available.
 For more information see the [Developer Guide](https://#/)
