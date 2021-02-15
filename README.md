@@ -1,9 +1,6 @@
 
 # White Rabbit Intel JavaScript SDK
 
-
-<!-- # AWS SDK for JavaScript -->
-
 [![NPM version](https://img.shields.io/npm/v/wri-sdk.svg)](https://www.npmjs.com/package/wri-sdk)
 [![NPM downloads](https://img.shields.io/npm/dm/wri-sdk.svg)](https://www.npmjs.com/package/wri-sdk)
 [![Build Status](https://circleci.com/gh/white-rabbit-ai-inc/sdk-js.svg?style=shield)](https://app.circleci.com/pipelines/github/white-rabbit-ai-inc/sdk-js)
@@ -56,7 +53,7 @@ var processing = require('wri-sdk/processing');
 
 
 <!-- # Contributing
-We welcome community contributions and pull requests. See [CONTRIBUTING.md](https://github.com/aws/aws-sdk-js/blob/master/CONTRIBUTING.md) for information on how to set up a development environment and submit code. -->
+We welcome community contributions and pull requests. See [CONTRIBUTING.md](sdk-js/blob/master/CONTRIBUTING.md) for information on how to set up a development environment and submit code. -->
 
 ## License
 
