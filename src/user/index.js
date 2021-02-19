@@ -10,6 +10,7 @@ const user = {
 
         return result
     },
+
     getUser: async (connection, id, email) => {
         let result = {
             message: 'error getting user for id'

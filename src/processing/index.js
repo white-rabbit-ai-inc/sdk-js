@@ -12,19 +12,35 @@ import matchSchema from '../../schema/match.json'
 import fetch from 'node-fetch'
 
 const schema = Object.freeze({
-    
         'profile.json': profileSchema,
         'match.json': matchSchema
-    
 })
 
+/**
+ * processing
+ * @exports processing
+ */
 const processing = {
+
+    /**
+     * init 
+     * set up initial connection params
+     *
+     * @param {string} typeName
+     * @return {object} the initialized connection object
+     */
     getType: (typeName) => {
         return types.getType(typeName)
     },
-    getProcessingTypes: () => {
-        return types.PROCESSING_TYPES
-    },
+    /**
+     * request 
+     * send a request for processing
+     *
+     * @param {object} connection {@connection}
+     * @param {object} type
+     * @param {object} data
+     * @return {object} the initialized connection object
+     */
     request: async (connection, type, data) => {
         if (!type) {
             throw new Error('request type is required')
@@ -58,6 +74,15 @@ const processing = {
         return result
         
     },
+    /**
+     * getResults 
+     * get results of a processing request
+     *
+     * @param {object} connection
+     * @param {object} type
+     * @param {string} requestId
+     * @return {object} the initialized connection object
+     */
     getResults: async (connection, type, requestId) => {
         let results = {
             message: 'error requesting processing'

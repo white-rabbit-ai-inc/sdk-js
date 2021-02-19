@@ -4,7 +4,7 @@ import { request } from '../util/request'
 
 /**
  * data module
- * @module
+ * @exports data
  */
 const data = {
     /**
@@ -44,4 +44,3 @@ const data = {
 };
 
 export default data
-

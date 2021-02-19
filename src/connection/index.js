@@ -14,30 +14,34 @@ requests[ENVIRONMENT_TYPES.STAGING] = {
     url: 'https://staging-api.whiterabbitintel.com'
 };
 
+/**
+ * connection
+ * @exports connection
+ */
 const connection = {
     ENVIRONMENT_TYPES: ENVIRONMENT_TYPES,
     requests: requests,
-    environment: requests[ENVIRONMENT_TYPES.STAGING],
-    apiKey: undefined,
-    
+    environment: requests[ENVIRONMENT_TYPES.PRODUCTION],
+
+     /**
+     * init 
+     * set up initial connection params
+     *
+     * @param {object} params
+     * @return {object} the initialized connection object
+     */
     init: function(params) {
         if(params){
             this.environment = params.environment || requests[ENVIRONMENT_TYPES.STAGING]
-            this.apiKey = params.apiKey || undefined
         }
         return this
     }
-}
-
-const setKey = function  (key)  {
-    this.apiKey = key
 }
 
 const setEnvironment = function(env) {
     this.environment = requests[env]
 }
 
-connection.setKey = setKey
 connection.setEnvironment = setEnvironment    
 
 export default connection

@@ -4,7 +4,9 @@
   "description": "javascript sdk for white rabbit intel",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --forceExit"
+    "test": "jest --coverage --forceExit",
+    "genDocCommand": "./node_modules/.bin/jsdoc ./src/ -c ./conf.json -r -P ./package.json",
+    "genDoc": "./node_modules/.bin/jsdoc ./src/ -c ./conf.json -R README.md"
   },
   "repository": {
     "type": "git",
@@ -27,15 +29,17 @@
   "homepage": "https://github.com/white-rabbit-ai-inc/sdk-js#readme",
   "devDependencies": {
     "@babel/preset-env": "^7.12.1",
-    "jaguarjs-jsdoc": "^1.1.0",
+    "@pixi/jsdoc-template": "^2.6.0",
     "jest": "^26.6.2",
     "jest-fetch-mock": "^3.0.3",
     "jest-mock-axios": "^4.2.1",
+    "jsd-jekyll": "^0.1.1",
     "jsdoc": "^3.6.6",
     "webpack": "^5.4.0"
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "clean-jsdoc-theme": "^3.0.7",
     "jsonschema": "^1.4.0",
     "node-fetch": "^2.6.1"
   },

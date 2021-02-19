@@ -3,8 +3,7 @@ import axios from 'axios'
 import fetch from 'node-fetch'
 
 export const request = async (connection, params, data) => {
-    // if(connection.apiKey === undefined)
-    //     throw new Error('no apiKey set - please refer to the connection module')
+
     if(params.method === undefined)
         throw new Error('no method defined')
 
@@ -21,7 +20,7 @@ export const request = async (connection, params, data) => {
         url += `/${params.id}` 
     }
     else if(params.method === 'get' && params.queries){
-        // url += `/${id}`
+        
         for (const [key, value] of Object.entries(params.queries)) {
             url += url.includes('?') ? `&` : `?`
             url +=  `${key}=${value}`
@@ -43,8 +42,6 @@ export const request = async (connection, params, data) => {
         "access-key": process.env.WRI_ACCESS_KEY,
         "x-api-key": process.env.WRI_API_KEY
     }
-    // console.log('url',url)
-    // console.log('options',options)
     
     let result = await fetch(url,options)
     // console.log(result)
