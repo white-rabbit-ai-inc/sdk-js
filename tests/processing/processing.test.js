@@ -1,5 +1,7 @@
 import fs from 'fs'
 import { data , connection, processing } from '../../src'
+import os from 'os'
+
 
 fetch.dontMock()
 fetch.disableMocks()
@@ -7,8 +9,16 @@ fetch.disableMocks()
 describe('integration testing processing request', () => {
     let env = process.env;
     beforeEach(() => {
-        env.WRI_ACCESS_KEY = '28b8c9dfa13b58455fa383a42503f4defadc2ab7bf3a90be7a1147389c3ab1f7'
-        env.WRI_API_KEY = 'FMd9MofcZN7ZOJhlDNTGc1PRVzFRscDI7uzkpiQs';
+        const homedir = os.homedir();            
+        let lines = require('fs').readFileSync(`${homedir}/.wri/credentials`, 'utf-8')
+            .split('\n')
+            .filter(Boolean);
+            
+        lines.forEach((line) => {
+            let splitVals = line.split('=')
+            env[splitVals[0]]=splitVals[1]
+        })
+
     });
 
     test('test upload', async () => {
