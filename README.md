@@ -59,30 +59,3 @@ We welcome community contributions and pull requests. See [CONTRIBUTING.md](sdk-
 
 This SDK is distributed under the
 [MIT License](https://rem.mit-license.org)
-
-<!-- ### Connection
-    
-    const connection = connection.init()
-
-### Data
-
-async function upload
-    
-    data.upload(connection, { contentType: contentType, contentLength: fileSizeInBytes }, file)
-
-
-### Processing
-
-async function getTypes
-```javascript
-
-await getTypes()
-
-```
-
-async function getType
-```javascript
-
-await processing.getType('PROFILE')
-
-``` -->
