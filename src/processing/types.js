@@ -16,12 +16,17 @@ const getType = async (type) => {
 }
 
 const getTypes = async () => {
-    const conn = connection.init()
+    let keys = Object.keys(types)
+    if(keys.length == 0){
+        const conn = connection.init()
 
-    //query for types and return result
-    let response = await request(conn,{ method: 'GET', endPoint:'/processing?types'})
-    let result = await response.json()
-    return result.types
+        //query for types and return result
+        let response = await request(conn,{ method: 'GET', endPoint:'/processing?types'})
+        let result = await response.json()
+        types = result.types;
+    }
+    
+    return types
 }
 
 module.exports = {

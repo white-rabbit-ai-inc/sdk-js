@@ -22,7 +22,7 @@ describe('integration testing processing request', () => {
     });
 
     test('test upload', async () => {
-        jest.setTimeout(4000)
+        jest.setTimeout(10000)
         let contentType = 'application/json'
 
         const conn = connection.init()
