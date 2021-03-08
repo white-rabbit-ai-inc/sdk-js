@@ -39,7 +39,10 @@ const data = {
 
       });
       console.log('uploadStream results', result);
-      return result;
+      let responseUrl = new URL(result.url);
+      console.log('url', responseUrl.pathname.replace('/uploads/', ''));
+      let uuid = responseUrl.pathname.replace('/uploads/', '');
+      return uuid;
     } catch (e) {
       console.error(`Error! ${e.message}`);
     }
