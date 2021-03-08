@@ -21,15 +21,21 @@ const getType = async type => {
 };
 
 const getTypes = async () => {
-  const conn = _connection.default.init(); //query for types and return result
+  let keys = Object.keys(types);
+
+  if (keys.length == 0) {
+    const conn = _connection.default.init(); //query for types and return result
 
 
-  let response = await (0, _request.request)(conn, {
-    method: 'GET',
-    endPoint: '/processing?types'
-  });
-  let result = await response.json();
-  return result.types;
+    let response = await (0, _request.request)(conn, {
+      method: 'GET',
+      endPoint: '/processing?types'
+    });
+    let result = await response.json();
+    types = result.types;
+  }
+
+  return types;
 };
 
 module.exports = {
