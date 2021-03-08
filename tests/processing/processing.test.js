@@ -22,6 +22,7 @@ describe('integration testing processing request', () => {
     });
 
     test('test upload', async () => {
+        jest.setTimeout(4000)
         let contentType = 'application/json'
 
         const conn = connection.init()
@@ -31,13 +32,8 @@ describe('integration testing processing request', () => {
         const fileSizeInBytes = stats.size;
         const file = fs.readFileSync('lib/test.json');
 
-        let result = await data.upload(conn, { contentType: contentType, contentLength: fileSizeInBytes }, file)
-        console.log('result', result)
-
-        let url = new URL(result.url)
-        console.log('url',url.pathname.replace('/uploads/',''))
-
-        let uuid = url.pathname.replace('/uploads/','')
+        let uuid = await data.upload(conn, { contentType: contentType, contentLength: fileSizeInBytes }, file)
+        console.log('uuid', uuid)
 
         let type = await processing.getType('PROFILE')
         

@@ -19,10 +19,10 @@ const data = {
         console.log(connection)
         try {
             const response = await request(connection, { method: 'GET', endPoint: '/processing/url' })
-            
+
             let url = await response.json()
 
-            console.log('url',new URL(url.uploadUrl))
+            console.log('url', new URL(url.uploadUrl))
 
             let result = await fetch(url.uploadUrl, {
                 method: 'PUT',
@@ -34,12 +34,18 @@ const data = {
             })
 
             console.log('uploadStream results', result)
-            return result;
+
+            let responseUrl = new URL(result.url)
+            console.log('url', responseUrl.pathname.replace('/uploads/', ''))
+
+            let uuid = responseUrl.pathname.replace('/uploads/', '')
+
+            return uuid;
         }
         catch (e) {
             console.error(`Error! ${e.message}`)
         }
-       
+
     }
 };
 
