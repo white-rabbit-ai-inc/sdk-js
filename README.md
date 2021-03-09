@@ -18,7 +18,7 @@ For future releases, release notes will be available.
 * [Contributing](_#Contributing_) -->
 
 ## Getting Started
-[Getting Started Guide]((https://white-rabbit-ai-inc.github.io/sdk-js/docs/quickStart/README.md)
+[Getting Started Guide]((https://white-rabbit-ai-inc.github.io/sdk-js/quickStart/README.md)
 <!-- 
 ## How To Install
 
