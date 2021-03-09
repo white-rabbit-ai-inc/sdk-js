@@ -17,8 +17,9 @@ For future releases, release notes will be available.
 * [Getting Help](_#Getting-Help_)
 * [Contributing](_#Contributing_) -->
 
-<!-- ## Getting Started -->
-
+## Getting Started
+[Getting Started Guide]((https://white-rabbit-ai-inc.github.io/sdk-js/docs/quickStart/README.md)
+<!-- 
 ## How To Install
 
 ### In the Browser
@@ -46,8 +47,8 @@ var data = require('wri-sdk/data');
 var connection = require('wri-sdk/connection');
 
 // import WRI data processor 
-var processing = require('wri-sdk/processing'); 
-```
+var processing = require('wri-sdk/processing');  -->
+<!-- ``` -->
 
 <!-- # Getting Help -->
 
