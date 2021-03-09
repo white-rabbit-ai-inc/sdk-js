@@ -78,12 +78,18 @@ const processing = {
       return `{ "message" : ${msg} }`;
     }
 
-    let params = {
-      method: 'POST',
-      endPoint: type.url
-    };
-    let result = await (0, _request.request)(connection, params, data);
-    return result;
+    try {
+      let params = {
+        method: 'POST',
+        endPoint: type.url
+      };
+      let result = await (await (0, _request.request)(connection, params, data)).json(); // let id = await result.id
+
+      return result.id;
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
   },
 
   /**
