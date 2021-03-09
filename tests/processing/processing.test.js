@@ -55,6 +55,6 @@ describe('integration testing processing request', () => {
         }
         console.log(payload)
         let processingResult = await processing.request(conn,type, payload )
-        console.log(processingResult)
+        console.log('processingResult',processingResult)
     })
 })

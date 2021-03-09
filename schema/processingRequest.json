@@ -9,7 +9,8 @@
             "fileName": "",
             "fileType": "",
             "dataType": "",
-            "processingType": ""
+            "processingType": "",
+            "fileUuid":""
         }
     ],
     "required": [

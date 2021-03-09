@@ -12,8 +12,8 @@ import matchSchema from '../../schema/match.json'
 import fetch from 'node-fetch'
 
 const schema = Object.freeze({
-        'profile.json': profileSchema,
-        'match.json': matchSchema
+    'profile.json': profileSchema,
+    'match.json': matchSchema
 })
 
 /**
@@ -51,28 +51,35 @@ const processing = {
         let results = {
             message: 'error requesting processing'
         }
-        if(!data.processingType){
+        if (!data.processingType) {
             data.processingType = type.name
         }
 
-        if(!await validateData(baseSchema, data))
+        if (!await validateData(baseSchema, data))
             return '{ "message" : "the data provided does not meet minimum requirements" }'
-    
+
         let typeSchema = schema[type.schema]
-        if(!await validateData(typeSchema, data)){
+        if (!await validateData(typeSchema, data)) {
             let msg = `the data provided does not meet requirements for a ${type.name} request`
             return `{ "message" : ${msg} }`
         }
 
-        let params = {
-            method: 'POST',
-            endPoint: type.url
+        try {
+            let params = {
+                method: 'POST',
+                endPoint: type.url
+            }
+
+            let result = await (await req(connection, params, data)).json()
+
+            // let id = await result.id
+
+            return result.id
         }
-
-        let result = await req(connection,params, data)
-
-        return result
-        
+        catch (e) {
+            console.log(e)
+            throw e
+        }
     },
     /**
      * getResults 
