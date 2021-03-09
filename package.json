@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest --coverage --forceExit",
     "build": "babel src -d dist",
-    "genDocCommand": "./node_modules/.bin/jsdoc ./src/ -c ./conf.json -r -P ./package.json",
+    "genDocCommand": "./node_modules/.bin/jsdoc ./src/ -c ./conf.json -r -P ./package.json -R README.md",
     "genDoc": "./node_modules/.bin/jsdoc ./src/ -c ./conf.json -R README.md"
   },
   "repository": {
