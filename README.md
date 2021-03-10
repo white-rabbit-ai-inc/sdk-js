@@ -7,7 +7,7 @@
 
 ## Version 1.x Now Available
 The [version 1.x](https://github.com/white-rabbit-ai-inc/sdk-js) of the WRI JavaScript SDK generally available.
-For more information see the [Developer Guide](https://white-rabbit-ai-inc.github.io/sdk-js/)
+For more information see the [Getting Started Guide](quickStart/README.md) and the [JSDoc](https://white-rabbit-ai-inc.github.io/sdk-js/)
 <!-- or [API Reference](https://#). -->
 
 For future releases, release notes will be available.
@@ -18,7 +18,7 @@ For future releases, release notes will be available.
 * [Contributing](_#Contributing_) -->
 
 ## Getting Started
-[Getting Started Guide]((https://white-rabbit-ai-inc.github.io/sdk-js/quickStart/README.md)
+[Getting Started Guide](quickStart/README.md)
 <!-- 
 ## How To Install
 
