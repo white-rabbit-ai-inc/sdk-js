@@ -9,15 +9,20 @@ fetch.disableMocks()
 describe('integration testing processing request', () => {
     let env = process.env;
     beforeEach(() => {
-        const homedir = os.homedir();
-        let lines = require('fs').readFileSync(`${homedir}/.wri/credentials`, 'utf-8')
-            .split('\n')
-            .filter(Boolean);
+        try {
+            const homedir = os.homedir();
+            let lines = require('fs').readFileSync(`${homedir}/.wri/credentials`, 'utf-8')
+                .split('\n')
+                .filter(Boolean);
 
-        lines.forEach((line) => {
-            let splitVals = line.split('=')
-            env[splitVals[0]] = splitVals[1]
-        })
+            lines.forEach((line) => {
+                let splitVals = line.split('=')
+                env[splitVals[0]] = splitVals[1]
+            })
+        }
+        catch (e) {
+            console.log(e)
+        }
 
     });
 
