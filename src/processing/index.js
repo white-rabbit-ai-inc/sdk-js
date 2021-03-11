@@ -95,9 +95,11 @@ const processing = {
             message: 'error requesting processing'
         }
 
-        let requestObj = types.getType(type);
+        let queries = {
+            type: type.name
+        }
 
-        results = await req(connection, { method: 'GET', id: requestId, endPoint: requestObj.url })
+        results = await (await req(connection, { method: 'GET', id: requestId, endPoint: type.url, queries })).json()
 
         return results;
     }

@@ -19,7 +19,7 @@ export const request = async (connection, params, data) => {
     if(params.method === 'get' && params.id){
         url += `/${params.id}` 
     }
-    else if(params.method === 'get' && params.queries){
+    if(params.method === 'get' && params.queries){
         
         for (const [key, value] of Object.entries(params.queries)) {
             url += url.includes('?') ? `&` : `?`

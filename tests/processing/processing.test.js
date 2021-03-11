@@ -26,7 +26,7 @@ describe('integration testing processing request', () => {
 
     });
 
-    test('test upload', async () => {
+    test('test upload and profile', async () => {
         if (process.env.WRI_ACCESS_KEY) {
             jest.setTimeout(10000)
             let contentType = 'application/json'
@@ -62,6 +62,22 @@ describe('integration testing processing request', () => {
             console.log(payload)
             let processingResult = await processing.request(conn, type, payload)
             console.log('processingResult', processingResult)
+        }
+    })
+
+    test('test fetch', async () => {
+        let id = "3de32980-aea5-491b-af39-3470f19f3487"
+        if (process.env.WRI_ACCESS_KEY) {
+            jest.setTimeout(10000)
+           
+            const conn = connection.init()
+            conn.setEnvironment(connection.ENVIRONMENT_TYPES.STAGING)
+
+            let type = await processing.getType('PROFILE')
+
+            let processingResult = await processing.getResults(conn, type, id)
+            console.log('processingResult', processingResult)
+            return processingResult
         }
     })
 })
