@@ -77,7 +77,7 @@ const processing = {
             return result.id
         }
         catch (e) {
-            console.log(e)
+            console.error('error',e)
             throw e
         }
     },
@@ -95,11 +95,11 @@ const processing = {
             message: 'error requesting processing'
         }
 
-        let queries = {
-            type: type.name
-        }
+        // let queries = {
+        //     type: type.name
+        // }
 
-        results = await (await req(connection, { method: 'GET', id: requestId, endPoint: type.url, queries })).json()
+        results = await (await req(connection, { method: 'GET', id: requestId, endPoint: type.url })).json()
 
         return results;
     }

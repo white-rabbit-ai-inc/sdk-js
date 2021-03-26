@@ -39,8 +39,7 @@ describe('integration testing processing request', () => {
             const file = fs.readFileSync('lib/test.json');
 
             let uuid = await data.upload(conn, { contentType: contentType, contentLength: fileSizeInBytes }, file)
-            console.log('uuid', uuid)
-
+            
             let type = await processing.getType('PROFILE')
 
             let payload = {
@@ -53,13 +52,13 @@ describe('integration testing processing request', () => {
                     firstname: "firstname",
                     lastname: "lastname",
                     company: "company",
-                    win: "win"
+                    win: "status"
                 },
-                winMapping: "true",
+                winMapping: "sold",
                 dataSource: "spreadsheet",
                 productService: "product1"
             }
-            console.log(payload)
+
             let processingResult = await processing.request(conn, type, payload)
             console.log('processingResult', processingResult)
         }
