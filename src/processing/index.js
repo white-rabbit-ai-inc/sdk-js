@@ -70,14 +70,19 @@ const processing = {
                 endPoint: type.url
             }
 
-            let result = await (await req(connection, params, data)).json()
+            let requestResult = await req(connection, params, data)
+            let result = await requestResult.json()
 
+            // console.log(JSON.stringify(result))
             // let id = await result.id
-
+            if(requestResult.status !== 200){
+                // console.log(result)
+                return result
+            }
             return result.id
         }
         catch (e) {
-            console.error('error',e)
+            console.error('error',JSON.stringify(e))
             throw e
         }
     },

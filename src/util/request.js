@@ -45,8 +45,8 @@ export const request = async (connection, params, data) => {
     
     let result = await fetch(url,options)
     // console.log(result)
-    if(result.status !== 200){
-        console.error(result)
-    }
+    // if(result.status !== 200){
+    //     console.error(result)
+    // }
     return result
 }

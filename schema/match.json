@@ -9,10 +9,8 @@
             "fileMappings": {
                 "firstname": "Boba",
                 "lastname": "Fett",
-                "company": "Fett Bounties, Inc",
-                "win": "captured"
+                "company": "Fett Bounties, Inc"
             },
-            "winMapping": "true",
             "referenceFileUuid": "",
             "dataSource": "Empire CRM",
             "productService": "Track and Catch"
@@ -20,7 +18,6 @@
     ],
     "required": [
         "fileMappings",
-        "winMapping",
         "referenceFileUuid",
         "dataSource",
         "productService"
@@ -61,7 +58,7 @@
                     "anyOf": [
                         {
                             "email": {
-                                "$id": "#/properties/winMapping/properties/email",
+                                "$id": "#/properties/fileMappings/properties/email",
                                 "type": "string",
                                 "title": "The email field mapping",
                                 "description": "the name of the email field in the incoming dataset",
@@ -73,7 +70,7 @@
                         },
                         {
                             "linkedinUrl": {
-                                "$id": "#/properties/winMapping/properties/linkedinUrl",
+                                "$id": "#/properties/fileMappings/properties/linkedinUrl",
                                 "type": "string",
                                 "title": "The linkedinUrl mapping",
                                 "description": "the name of the linkedin url field in the incoming dataset",
@@ -85,7 +82,7 @@
                         },
                         {
                             "firstname": {
-                                "$id": "#/properties/winMapping/properties/firstname",
+                                "$id": "#/properties/fileMappings/properties/firstname",
                                 "type": "string",
                                 "title": "The firstname field mapping",
                                 "description": "the name of the first name field in the incoming dataset",
@@ -95,7 +92,7 @@
                                 ]
                             },
                             "lastname": {
-                                "$id": "#/properties/winMapping/properties/lastname",
+                                "$id": "#/properties/fileMappings/properties/lastname",
                                 "type": "string",
                                 "title": "The lastname field mapping",
                                 "description": "the name of the last name field in the incoming dataset",
@@ -105,7 +102,7 @@
                                 ]
                             },
                             "company": {
-                                "$id": "#/properties/winMapping/properties/company",
+                                "$id": "#/properties/fileMappings/properties/company",
                                 "type": "string",   
                                 "title": "The company field mapping",
                                 "description": "the name of the company field in the incoming dataset",
@@ -119,16 +116,6 @@
                 }
             },
             "additionalProperties": true
-        },
-        "winMapping": {
-            "$id": "#/properties/winMapping",
-            "type": "string",
-            "title": "Win or Advancement value",
-            "description": "the specific data value that indicates an advancement of win",
-            "default": "",
-            "examples": [
-                ""
-            ]
         },
         "referenceFileUuid": {
             "$id": "#/properties/referenceFileUuid",
