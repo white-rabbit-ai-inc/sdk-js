@@ -9,8 +9,10 @@
             "fileMappings": {
                 "firstname": "Boba",
                 "lastname": "Fett",
-                "company": "Fett Bounties, Inc"
+                "company": "Fett Bounties, Inc",
+                "win": "Lead Status"
             },
+            "winMapping": "closed",
             "referenceFileUuid": "",
             "dataSource": "Empire CRM",
             "productService": "Track and Catch"
@@ -116,6 +118,16 @@
                 }
             },
             "additionalProperties": true
+        },
+        "winMapping": {
+            "$id": "#/properties/winMapping",
+            "type": "string",
+            "title": "Win or Advancement value",
+            "description": "the specific data value that indicates an advancement of win",
+            "default": "",
+            "examples": [
+                ""
+            ]
         },
         "referenceFileUuid": {
             "$id": "#/properties/referenceFileUuid",

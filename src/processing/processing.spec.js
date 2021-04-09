@@ -54,7 +54,9 @@ describe('test processing errors', () => {
 
 
         const conn = connection.init({ apiKey: '1234' })
-        let result = await(await processing.getResults(conn, 'PROFILE', { requestId: '1234' })).json()
+        let requestResult = await processing.getResults(conn, 'PROFILE', { requestId: '1234' })
+        console.log(requestResult)
+        let result = requestResult
         console.log('result', result)
 
         expect(result.data).not.toBe(undefined)
