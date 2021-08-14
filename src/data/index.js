@@ -1,5 +1,5 @@
 
-
+import fetch from 'node-fetch'
 import { request } from '../util/request'
 
 /**
