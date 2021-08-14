@@ -83,11 +83,18 @@ const processing = {
         method: 'POST',
         endPoint: type.url
       };
-      let result = await (await (0, _request.request)(connection, params, data)).json(); // let id = await result.id
+      let requestResult = await (0, _request.request)(connection, params, data);
+      let result = await requestResult.json(); // console.log(JSON.stringify(result))
+      // let id = await result.id
+
+      if (requestResult.status !== 200) {
+        // console.log(result)
+        return result;
+      }
 
       return result.id;
     } catch (e) {
-      console.log(e);
+      console.error('error', JSON.stringify(e));
       throw e;
     }
   },
@@ -104,15 +111,15 @@ const processing = {
   getResults: async (connection, type, requestId) => {
     let results = {
       message: 'error requesting processing'
-    };
+    }; // let queries = {
+    //     type: type.name
+    // }
 
-    let requestObj = _types.default.getType(type);
-
-    results = await (0, _request.request)(connection, {
+    results = await (await (0, _request.request)(connection, {
       method: 'GET',
       id: requestId,
-      endPoint: requestObj.url
-    });
+      endPoint: type.url
+    })).json();
     return results;
   }
 };

@@ -61,9 +61,11 @@ describe('test processing errors', () => {
       apiKey: '1234'
     });
 
-    let result = await (await _.default.getResults(conn, 'PROFILE', {
+    let requestResult = await _.default.getResults(conn, 'PROFILE', {
       requestId: '1234'
-    })).json();
+    });
+    console.log(requestResult);
+    let result = requestResult;
     console.log('result', result);
     expect(result.data).not.toBe(undefined);
     expect(result.data.length).toBe(1);

@@ -23,7 +23,9 @@ const request = async (connection, params, data) => {
 
   if (params.method === 'get' && params.id) {
     url += `/${params.id}`;
-  } else if (params.method === 'get' && params.queries) {
+  }
+
+  if (params.method === 'get' && params.queries) {
     for (const [key, value] of Object.entries(params.queries)) {
       url += url.includes('?') ? `&` : `?`;
       url += `${key}=${value}`;
@@ -48,10 +50,9 @@ const request = async (connection, params, data) => {
     "x-api-key": process.env.WRI_API_KEY
   };
   let result = await (0, _nodeFetch.default)(url, options); // console.log(result)
-
-  if (result.status !== 200) {
-    console.error(result);
-  }
+  // if(result.status !== 200){
+  //     console.error(result)
+  // }
 
   return result;
 };
