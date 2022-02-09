@@ -1,34 +1,24 @@
 
-import connection from '../connection'
-import { request } from '../util/request'
-
-let types = {}
+const types = {
+  PROFILE: {
+    name: 'profile',
+    url: '/processing',
+    schema: 'profile.json'
+  },
+  MATCH: {
+    name: 'match',
+    url: '/processing',
+    schema: 'match.json'
+  }
+}
 
 const getType = async (type) => {
-  let keys = Object.keys(types)
-  if (keys.length === 0) {
-    types = await getTypes()
-    keys = Object.keys(types)
-  }
+  const keys = Object.keys(types)
   if (!keys.includes(type)) {
     throw new Error('Invalid Processing Type')
   }
   return types[type]
-}
 
-const getTypes = async () => {
-  const keys = Object.keys(types)
-  if (keys.length === 0) {
-    const conn = connection.init()
-
-    // query for types and return result
-    const response = await request(conn, { method: 'GET', endPoint: '/processing?types' })
-    const result = await response.json()
-    types = result.types
-  }
-
-  return types
-}
 
 module.exports = {
   types: types,
