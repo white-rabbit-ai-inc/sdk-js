@@ -13,7 +13,7 @@ const types = {
   }
 };
 
-const getType = async type => {
+const getType = type => {
   const keys = Object.keys(types);
 
   if (!keys.includes(type)) {
