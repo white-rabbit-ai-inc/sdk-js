@@ -42,8 +42,8 @@ export const request = async (connection, params, data) => {
   }
 
   options.headers = {
-    'access-key': process.env.WRI_ACCESS_KEY,
-    'x-api-key': process.env.WRI_API_KEY
+    'access-key': process.env.WRI_ACCESS_KEY || connection.accessKey,
+    'x-api-key': process.env.WRI_API_KEY || connection.apiKey
   }
 
   const result = await fetch(url, options)
