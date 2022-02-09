@@ -38,10 +38,10 @@ The profile request examines the provided data and provides a look at the overar
         "dataType": "win/loss",
         "processingType": "",   //provided by getType('PROFILE')
         "fileMappings": {
-            "firstname": "Boba",
-            "lastname": "Fett",
-            "company": "Fett Bounties, Inc",
-            "win": "captured"
+            "firstname": "First Name",
+            "lastname": "Last Name",
+            "company": "Company Name",
+            "win": "Deal Status"
         },
         "winMapping": "true",
         "dataSource": "Empire CRM",

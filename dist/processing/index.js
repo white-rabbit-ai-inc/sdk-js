@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _jsonschema = _interopRequireDefault(require("jsonschema"));
-
 var _types = _interopRequireDefault(require("./types"));
 
 var _request = require("../util/request");
@@ -23,6 +21,11 @@ var _nodeFetch = _interopRequireDefault(require("node-fetch"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+/* global fetch: true */
+if (!fetch) {
+  fetch = _nodeFetch.default;
+}
+
 const schema = Object.freeze({
   'profile.json': _profile.default,
   'match.json': _match.default
@@ -34,7 +37,7 @@ const schema = Object.freeze({
 
 const processing = {
   /**
-   * init 
+   * init
    * set up initial connection params
    *
    * @param {string} typeName
@@ -45,7 +48,7 @@ const processing = {
   },
 
   /**
-   * request 
+   * request
    * send a request for processing
    *
    * @param {object} connection {@connection}
@@ -60,31 +63,35 @@ const processing = {
 
     if (!data) {
       throw new Error('no payload found - request parameters required to process data');
-    }
+    } // const results = {
+    //   message: 'error requesting processing'
+    // }
 
-    let results = {
-      message: 'error requesting processing'
-    };
 
     if (!data.processingType) {
       data.processingType = type.name;
     }
 
-    if (!(await (0, _validator.default)(_processingRequest.default, data))) return '{ "message" : "the data provided does not meet minimum requirements" }';
-    let typeSchema = schema[type.schema];
+    if (!(await (0, _validator.default)(_processingRequest.default, data))) {
+      return JSON.stringify({
+        message: 'the data provided does not meet minimum requirements'
+      });
+    }
+
+    const typeSchema = schema[type.schema];
 
     if (!(await (0, _validator.default)(typeSchema, data))) {
-      let msg = `the data provided does not meet requirements for a ${type.name} request`;
-      return `{ "message" : ${msg} }`;
+      const msg = `the data provided does not meet requirements for a ${type.name} request`;
+      return `{ 'message' : ${msg} }`;
     }
 
     try {
-      let params = {
+      const params = {
         method: 'POST',
         endPoint: type.url
       };
-      let requestResult = await (0, _request.request)(connection, params, data);
-      let result = await requestResult.json(); // console.log(JSON.stringify(result))
+      const requestResult = await (0, _request.request)(connection, params, data);
+      const result = await requestResult.json(); // console.log(JSON.stringify(result))
       // let id = await result.id
 
       if (requestResult.status !== 200) {
@@ -100,7 +107,7 @@ const processing = {
   },
 
   /**
-   * getResults 
+   * getResults
    * get results of a processing request
    *
    * @param {object} connection

@@ -11,27 +11,30 @@ let types = {};
 const getType = async type => {
   let keys = Object.keys(types);
 
-  if (keys.length == 0) {
+  if (keys.length === 0) {
     types = await getTypes();
     keys = Object.keys(types);
   }
 
-  if (!keys.includes(type)) throw new Error('Invalid Processing Type');
+  if (!keys.includes(type)) {
+    throw new Error('Invalid Processing Type');
+  }
+
   return types[type];
 };
 
 const getTypes = async () => {
-  let keys = Object.keys(types);
+  const keys = Object.keys(types);
 
-  if (keys.length == 0) {
-    const conn = _connection.default.init(); //query for types and return result
+  if (keys.length === 0) {
+    const conn = _connection.default.init(); // query for types and return result
 
 
-    let response = await (0, _request.request)(conn, {
+    const response = await (0, _request.request)(conn, {
       method: 'GET',
       endPoint: '/processing?types'
     });
-    let result = await response.json();
+    const result = await response.json();
     types = result.types;
   }
 
