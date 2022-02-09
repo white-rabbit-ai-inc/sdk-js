@@ -24,9 +24,11 @@ const connection = {
   ENVIRONMENT_TYPES: ENVIRONMENT_TYPES,
   requests: requests,
   environment: requests[ENVIRONMENT_TYPES.PRODUCTION],
+  accessKey: null,
+  apiKey: null,
 
   /**
-  * init 
+  * init
   * set up initial connection params
   *
   * @param {object} params
@@ -35,6 +37,11 @@ const connection = {
   init: function (params) {
     if (params) {
       this.environment = params.environment || requests[ENVIRONMENT_TYPES.STAGING];
+    }
+
+    if (params && params.accessKey && params.apiKey) {
+      this.accessKey = params.accessKey;
+      this.apiKey = params.apiKey;
     }
 
     return this;
