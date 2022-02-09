@@ -1,6 +1,6 @@
 {
   "name": "wri-sdk",
-  "version": "1.1.10",
+  "version": "1.2.0",
   "description": "javascript sdk for white rabbit intel",
   "main": "index.js",
   "scripts": {
