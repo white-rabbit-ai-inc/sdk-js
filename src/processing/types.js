@@ -18,7 +18,7 @@ const getType = async (type) => {
     throw new Error('Invalid Processing Type')
   }
   return types[type]
-
+}
 
 module.exports = {
   types: types,
