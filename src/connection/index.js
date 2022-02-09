@@ -1,47 +1,53 @@
 
 const ENVIRONMENT_TYPES = Object.freeze({
-    PRODUCTION: Symbol('PRODUCTION'),
-    STAGING: Symbol('STAGING')
-});
+  PRODUCTION: Symbol('PRODUCTION'),
+  STAGING: Symbol('STAGING')
+})
 
-const requests = {};
+const requests = {}
 
 requests[ENVIRONMENT_TYPES.PRODUCTION] = {
-    url: 'https://api.whiterabbitintel.com'
-};
+  url: 'https://api.whiterabbitintel.com'
+}
 
 requests[ENVIRONMENT_TYPES.STAGING] = {
-    url: 'https://staging-api.whiterabbitintel.com'
-};
+  url: 'https://staging-api.whiterabbitintel.com'
+}
 
 /**
  * connection
  * @exports connection
  */
 const connection = {
-    ENVIRONMENT_TYPES: ENVIRONMENT_TYPES,
-    requests: requests,
-    environment: requests[ENVIRONMENT_TYPES.PRODUCTION],
+  ENVIRONMENT_TYPES: ENVIRONMENT_TYPES,
+  requests: requests,
+  environment: requests[ENVIRONMENT_TYPES.PRODUCTION],
+  accessKey: null,
+  apiKey: null,
 
-     /**
-     * init 
-     * set up initial connection params
-     *
-     * @param {object} params
-     * @return {object} the initialized connection object
-     */
-    init: function(params) {
-        if(params){
-            this.environment = params.environment || requests[ENVIRONMENT_TYPES.STAGING]
-        }
-        return this
+  /**
+  * init
+  * set up initial connection params
+  *
+  * @param {object} params
+  * @return {object} the initialized connection object
+  */
+  init: function (params) {
+    if (params) {
+      this.environment = params.environment || requests[ENVIRONMENT_TYPES.STAGING]
     }
+    if (params && (params.accessKey && params.apiKey)) {
+      this.accessKey = params.accessKey
+      this.apiKey = params.apiKey
+    }
+    return this
+  }
 }
 
-const setEnvironment = function(env) {
-    this.environment = requests[env]
+const setEnvironment = function (env) {
+  this.environment = requests[env]
 }
 
-connection.setEnvironment = setEnvironment    
+connection.setEnvironment = setEnvironment
 
 export default connection

@@ -11,12 +11,19 @@ The type **_must_** be MATCH.
    let type = await wri.processing.getType('MATCH')
 ```
 
-The payload **_must_** have a referenceFileUuid.  To run a match on data that has previously been profiled, the fileUuid should reference the current file upload and the referenceFileUuid should be the uuid of the previously profiled data
+The payload **_must_** have a persona uuid.  This uuid is returned from a profile request.
+
+First upload the data to run scoring on (a.k.a the match data).  Keep the returned uuid and provide that to the match processing request as the fileUuid.
+
+
+referenceFileUuid = persona uuid
+fileUuid = match data upload uuid
+
 
 ```javascript
     let payload = {
         ...
-        referenceFileUuid: returnedUuid,
+        referenceFileUuid: personaUuid,
         ...
     }
 ```
@@ -27,7 +34,7 @@ All together, that looks like the following example...
    let type = await wri.processing.getType('MATCH')
 
     let payload = {
-        fileUuid: uuid,
+        fileUuid: 'upload file uuid',
         fileName: 'Testing sdk',
         fileType: 'application/json',
         dataType: 'win/loss',
@@ -39,7 +46,7 @@ All together, that looks like the following example...
             win: "win"
         },
         winMapping: "true",
-        referenceFileUuid: "previous uuid",
+        referenceFileUuid: "persona uuid",
         dataSource: "spreadsheet",
         productService: "product1"
     }
@@ -63,13 +70,13 @@ The match request examines the provided data for similarities with previously su
             "win": "captured"
         },
         "winMapping": "true",
-        "referenceFileUuid": [fileUuidHere],
+        "referenceFileUuid": personaUuidHere,
         "dataSource": "Empire CRM",
         "productService": "Track and Catch",
         ...
     }
 ```
-The payload **_must_** have a referenceFileUuid.  To run a match on data that has previously been profiled, the fileUuid should reference the current file upload and the referenceFileUuid should be the uuid of the previously [profiled](profile.md)  data
+The payload **_must_** have a persona/profile uuid in the referenceFileUuid.  To run a match on data that has previously been profiled, the fileUuid should reference the current match data file upload and the referenceFileUuid should be the uuid of the previously [profiled](profile.md) data.
 
 And then one of fileUuid or data **_must_** be supplied.
 
