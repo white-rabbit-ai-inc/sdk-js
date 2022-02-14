@@ -84,7 +84,7 @@ const processing = {
         endPoint: type.url
       };
       const requestResult = await (0, _request.request)(connection, params, data);
-      const result = await requestResult.json(); // console.log(JSON.stringify(result))
+      const result = await requestResult; // console.log(JSON.stringify(result))
       // let id = await result.id
 
       if (requestResult.status !== 200) {

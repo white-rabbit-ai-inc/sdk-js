@@ -31,7 +31,7 @@ const data = {
         method: 'GET',
         endPoint: '/processing/url'
       });
-      const url = await response.json();
+      const url = await response;
       console.log('url', new URL(url.uploadUrl)); // const result = await fetch(url.uploadUrl, {
       //   method: 'PUT',
       //   headers: {
