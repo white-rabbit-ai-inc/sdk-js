@@ -7,13 +7,6 @@ import baseSchema from '../../schema/processingRequest.json'
 import profileSchema from '../../schema/profile.json'
 import matchSchema from '../../schema/match.json'
 
-/* global fetch: true */
-import nodeFetch from 'node-fetch'
-
-if (!fetch) {
-  fetch = nodeFetch
-}
-
 const schema = Object.freeze({
   'profile.json': profileSchema,
   'match.json': matchSchema
@@ -107,7 +100,7 @@ const processing = {
     //     type: type.name
     // }
 
-    results = await (await req(connection, { method: 'GET', id: requestId, endPoint: type.url })).json()
+    results = await req(connection, { method: 'GET', id: requestId, endPoint: type.url })
 
     return results
   }

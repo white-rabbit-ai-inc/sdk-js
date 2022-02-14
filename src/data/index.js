@@ -1,10 +1,7 @@
 /* global fetch: true */
-import nodeFetch from 'node-fetch'
+import axios from 'axios'
 import { request } from '../util/request'
 
-if (!fetch) {
-  fetch = nodeFetch
-}
 /**
  * data module
  * @exports data
@@ -25,14 +22,23 @@ const data = {
 
       console.log('url', new URL(url.uploadUrl))
 
-      const result = await fetch(url.uploadUrl, {
-        method: 'PUT',
+      // const result = await fetch(url.uploadUrl, {
+      //   method: 'PUT',
+      //   headers: {
+      //     'Content-length': params.contentLength,
+      //     ContentType: params.contentType
+      //   },
+      //   body: stream // Here, stringContent or bufferContent would also work
+      // })
+
+      const config = {
         headers: {
           'Content-length': params.contentLength,
           ContentType: params.contentType
-        },
-        body: stream // Here, stringContent or bufferContent would also work
-      })
+        }
+      }
+
+      const result = await axios.put(url.uploadUrl, stream, config)
 
       console.log('uploadStream results', result)
 

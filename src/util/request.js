@@ -1,10 +1,7 @@
 
 /* global fetch: true */
-import nodeFetch from 'node-fetch'
-
-if (!fetch) {
-  fetch = nodeFetch
-}
+// import fetch from 'cross-fetch'
+import axios from 'axios'
 
 export const request = async (connection, params, data) => {
   if (params.method === undefined) {
@@ -46,7 +43,13 @@ export const request = async (connection, params, data) => {
     'x-api-key': process.env.WRI_API_KEY || connection.apiKey
   }
 
-  const result = await fetch(url, options)
+  // const result = await fetch(url, options)
+  const result = await axios({
+    method: params.method, // you can set what request you want to be
+    url: url,
+    data: options.body,
+    headers: options.headers
+  })
   // console.log(result)
   // if(result.status !== 200){
   //     console.error(result)
