@@ -68,7 +68,7 @@ const processing = {
       }
 
       const requestResult = await req(connection, params, data)
-      const result = await requestResult.json()
+      const result = await requestResult
 
       // console.log(JSON.stringify(result))
       // let id = await result.id
