@@ -17,14 +17,7 @@ var _profile = _interopRequireDefault(require("../../schema/profile.json"));
 
 var _match = _interopRequireDefault(require("../../schema/match.json"));
 
-var _nodeFetch = _interopRequireDefault(require("node-fetch"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* global fetch: true */
-if (!fetch) {
-  fetch = _nodeFetch.default;
-}
 
 const schema = Object.freeze({
   'profile.json': _profile.default,

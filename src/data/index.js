@@ -40,6 +40,15 @@ const data = {
 
       // const result = await axios.put(url.uploadUrl, stream, config)
 
+      // const config = {
+      //   headers: {
+      //     'Content-length': params.contentLength,
+      //     ContentType: params.contentType
+      //   }
+      // }
+
+      // const result = await axios.put(url.uploadUrl, stream, config)
+
       console.log('uploadStream results', result)
 
       const responseUrl = new URL(result.url)
