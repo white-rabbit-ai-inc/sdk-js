@@ -1,4 +1,4 @@
-/* global test: true, expect, describe */
+/* global test: true, expect, describe, fetch */
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 
@@ -44,43 +44,20 @@ describe('test processing errors', () => {
   })
 
   test('test get result', async () => {
-    mock.onGet().reply(200, {
+    const mockResponse = {
       id: '1234',
       data: ['this is response data']
-    })
-    // fetch.mockResponse(JSON.stringify(mockResponse))
+    }
+    fetch.mockResponse(JSON.stringify(mockResponse))
 
     const conn = connection.init({ apiKey: '1234' })
     const result = await processing.getResults(conn, 'PROFILE', { requestId: '1234' })
+    console.log('result', result)
 
-    console.log('test get result', result)
-
-    console.log(result.data)
     expect(result.data).not.toBe(undefined)
-    expect(result.data.data.length).toBe(1)
-    expect(result.data.data[0]).toBe('this is response data')
+    expect(result.data.length).toBe(1)
+    expect(result.data[0]).toBe('this is response data')
   })
-
-  // test('test url get', async () => {
-  //     let mockResponse = {
-  //         id: '1234',
-  //         data: ['this is response data']
-  //     }
-  //     fetch.mockResponse(
-  //         (req) => {
-  //             let syms = Object.getOwnPropertySymbols(req)
-  //             syms.forEach((symbol) => {
-  //                 let obj = req[symbol]
-  //                 if (obj.parsedURL)
-  //                     req = obj
-  //             })
-
-  //             return new Promise(resolve => setTimeout(() => resolve(JSON.stringify({ req: req, response: mockResponse })), 100))
-  //         })
-  //     const conn = connection.init({ apiKey: '1234' })
-  //     let result = await(await processing.getResults(conn, 'PROFILE', '1234')).json()
-  //     console.log(result)
-  // })
 
   test('test url post', async () => {
     mock.onPost().reply(200, {

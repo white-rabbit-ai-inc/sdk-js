@@ -1,19 +1,17 @@
-/* global test: true, expect, describe */
-import axios from 'axios'
-import MockAdapter from 'axios-mock-adapter'
+/* global test: true, expect, describe, fetch */
+import { enableFetchMocks } from 'jest-fetch-mock'
 
 import account from './'
 import connection from '../connection'
 
-const mock = new MockAdapter(axios)
+enableFetchMocks()
 describe('test account errors', () => {
-
   // test('test getAccount returns error',async () => {
-  //     expect(account.getAccount().message).toBe('error getting account') 
+  //     expect(account.getAccount().message).toBe('error getting account')
   //  })
 
   test('test getAccount', async () => {
-    mock.onGet().reply(200, {
+    fetch.mockResponse(JSON.stringify({
       accounts: [
         {
           id: '1234',
@@ -21,13 +19,13 @@ describe('test account errors', () => {
         }
 
       ]
-    })
+    }))
 
     const conn = connection.init({ apiKey: '1234' })
-    const result = await account.getAccount(conn)
-    console.log('result', result)
-    // const result = await response
+    const response = await account.getAccount(conn)
+    console.log('response', response)
+    const result = await response
     expect(result).not.toBe(undefined)
-    expect(result.data.accounts.length).toBe(1)
+    expect(result.accounts.length).toBe(1)
   })
 })
