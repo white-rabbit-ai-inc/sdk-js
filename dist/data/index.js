@@ -5,22 +5,18 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _nodeFetch = _interopRequireDefault(require("node-fetch"));
+var _isomorphicFetch = _interopRequireDefault(require("isomorphic-fetch"));
 
 var _request = require("../util/request");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global fetch: true */
-if (!fetch) {
-  fetch = _nodeFetch.default;
-}
+
 /**
  * data module
  * @exports data
  */
-
-
 const data = {
   /**
    * Blend two colors together.
@@ -35,9 +31,9 @@ const data = {
         method: 'GET',
         endPoint: '/processing/url'
       });
-      const url = await response.json();
+      const url = await response;
       console.log('url', new URL(url.uploadUrl));
-      const result = await fetch(url.uploadUrl, {
+      const result = await (0, _isomorphicFetch.default)(url.uploadUrl, {
         method: 'PUT',
         headers: {
           'Content-length': params.contentLength,
@@ -45,7 +41,14 @@ const data = {
         },
         body: stream // Here, stringContent or bufferContent would also work
 
-      });
+      }); // const config = {
+      //   headers: {
+      //     'Content-length': params.contentLength,
+      //     ContentType: params.contentType
+      //   }
+      // }
+      // const result = await axios.put(url.uploadUrl, stream, config)
+
       console.log('uploadStream results', result);
       const responseUrl = new URL(result.url);
       console.log('url', responseUrl.pathname.replace('/uploads/', ''));

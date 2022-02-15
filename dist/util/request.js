@@ -5,15 +5,14 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.request = void 0;
 
-var _nodeFetch = _interopRequireDefault(require("node-fetch"));
+var _isomorphicFetch = _interopRequireDefault(require("isomorphic-fetch"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* global fetch: true */
-if (!fetch) {
-  fetch = _nodeFetch.default;
-}
-
+// if (!fetch) {
+//   fetch = nodeFetch
+// }
 const request = async (connection, params, data) => {
   if (params.method === undefined) {
     throw new Error('no method defined');
@@ -55,8 +54,14 @@ const request = async (connection, params, data) => {
     'access-key': process.env.WRI_ACCESS_KEY || connection.accessKey,
     'x-api-key': process.env.WRI_API_KEY || connection.apiKey
   };
-  const result = await fetch(url, options); // console.log(result)
-  // if(result.status !== 200){
+  const result = await (await (0, _isomorphicFetch.default)(url, options)).json(); // const result = await axios({
+  //   method: params.method, // you can set what request you want to be
+  //   url: url,
+  //   data: options.body,
+  //   headers: options.headers
+  // })
+
+  console.log(result); // if(result.status !== 200){
   //     console.error(result)
   // }
 

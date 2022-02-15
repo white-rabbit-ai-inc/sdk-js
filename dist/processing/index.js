@@ -91,7 +91,7 @@ const processing = {
         endPoint: type.url
       };
       const requestResult = await (0, _request.request)(connection, params, data);
-      const result = await requestResult.json(); // console.log(JSON.stringify(result))
+      const result = await requestResult; // console.log(JSON.stringify(result))
       // let id = await result.id
 
       if (requestResult.status !== 200) {
@@ -122,11 +122,11 @@ const processing = {
     //     type: type.name
     // }
 
-    results = await (await (0, _request.request)(connection, {
+    results = await (0, _request.request)(connection, {
       method: 'GET',
       id: requestId,
       endPoint: type.url
-    })).json();
+    });
     return results;
   }
 };

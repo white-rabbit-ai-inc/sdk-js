@@ -1,40 +1,33 @@
-import { enableFetchMocks } from 'jest-fetch-mock'
+/* global test: true, expect, describe */
+import axios from 'axios'
+import MockAdapter from 'axios-mock-adapter'
 
 import account from './'
 import connection from '../connection'
 
-enableFetchMocks()
-
+const mock = new MockAdapter(axios)
 describe('test account errors', () => {
-    
-    // test('test getAccount returns error',async () => {
-    //     expect(account.getAccount().message).toBe('error getting account') 
-    //  })
-     
-     test('test getAccount', async () => {
-        fetch.mockResponse(JSON.stringify({
-            accounts: [
-                {
-                    id: '1234',
-                    ownerId: '9087'
-                }
 
-            ]
-        }))
+  // test('test getAccount returns error',async () => {
+  //     expect(account.getAccount().message).toBe('error getting account') 
+  //  })
 
-        const conn = connection.init({ apiKey: '1234' })
-        let response = await account.getAccount(conn);
-        console.log('response', response)
-        let result  = await response.json()
-        expect(result).not.toBe(undefined)
-        expect(result.accounts.length).toBe(1)
+  test('test getAccount', async () => {
+    mock.onGet().reply(200, {
+      accounts: [
+        {
+          id: '1234',
+          ownerId: '9087'
+        }
+
+      ]
     })
 
-    //  test('test getAccounts returns error',() => {
-    //      expect(account.getAccounts().message).toBe('error getting accounts') 
-    //   })
-      
-    //   test('test createAccount returns error',() => {
-    //      expect(account.createAccount().message).toBe('error creating account') 
-    //   })
-}) 
+    const conn = connection.init({ apiKey: '1234' })
+    const result = await account.getAccount(conn)
+    console.log('result', result)
+    // const result = await response
+    expect(result).not.toBe(undefined)
+    expect(result.data.accounts.length).toBe(1)
+  })
+})

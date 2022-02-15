@@ -75,7 +75,7 @@ const processing = {
       }
 
       const requestResult = await req(connection, params, data)
-      const result = await requestResult.json()
+      const result = await requestResult
 
       // console.log(JSON.stringify(result))
       // let id = await result.id
@@ -107,7 +107,7 @@ const processing = {
     //     type: type.name
     // }
 
-    results = await (await req(connection, { method: 'GET', id: requestId, endPoint: type.url })).json()
+    results = await req(connection, { method: 'GET', id: requestId, endPoint: type.url })
 
     return results
   }

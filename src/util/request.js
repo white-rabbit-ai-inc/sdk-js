@@ -1,10 +1,9 @@
-
 /* global fetch: true */
-import nodeFetch from 'node-fetch'
+import fetch from 'isomorphic-fetch'
 
-if (!fetch) {
-  fetch = nodeFetch
-}
+// if (!fetch) {
+//   fetch = nodeFetch
+// }
 
 export const request = async (connection, params, data) => {
   if (params.method === undefined) {
@@ -46,8 +45,15 @@ export const request = async (connection, params, data) => {
     'x-api-key': process.env.WRI_API_KEY || connection.apiKey
   }
 
-  const result = await fetch(url, options)
-  // console.log(result)
+  const result = await (await fetch(url, options)).json()
+  // const result = await axios({
+  //   method: params.method, // you can set what request you want to be
+  //   url: url,
+  //   data: options.body,
+  //   headers: options.headers
+  // })
+
+  console.log(result)
   // if(result.status !== 200){
   //     console.error(result)
   // }
