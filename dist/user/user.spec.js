@@ -1,8 +1,6 @@
 "use strict";
 
-var _axios = _interopRequireDefault(require("axios"));
-
-var _axiosMockAdapter = _interopRequireDefault(require("axios-mock-adapter"));
+var _jestFetchMock = require("jest-fetch-mock");
 
 var _ = _interopRequireDefault(require("./"));
 
@@ -10,20 +8,11 @@ var _connection = _interopRequireDefault(require("../connection"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* global jest, test: true, expect, beforeEach, describe */
-const mock = new _axiosMockAdapter.default(_axios.default);
+/* global test: true, expect, fetch, describe */
+(0, _jestFetchMock.enableFetchMocks)();
 describe('test user errors', () => {
-  beforeEach(() => {
-    // fetch.resetMocks();
-    // fetch.doMock()
-    // fetch.mockResponse(JSON.stringify({ access_token: '12345' }))
-    jest.setTimeout(10000); // mockAxios.get.mockImplementationOnce(() =>
-    //   Promise.resolve({
-    //     data: { results: ["cat.jpg"] }
-    //   })
-    // )
-
-    mock.onGet().reply(200, {
+  test('test getUsers', async () => {
+    fetch.mockResponse(JSON.stringify({
       users: [{
         id: '1234',
         email: 'foo@bar.com'
@@ -37,77 +26,72 @@ describe('test user errors', () => {
         id: '8765',
         email: 'foo@sna.com'
       }]
-    });
-    mock.onPost().reply(200, {
-      users: [{
-        id: 1,
-        name: 'John Smith'
-      }]
-    });
-  });
-  test('test getUsers', async () => {
+    }));
+
     const conn = _connection.default.init({
-      apiKey: '1234',
-      accessKey: '4321'
+      apiKey: '1234'
     });
 
     const response = await _.default.getUsers(conn);
     console.log('response', response);
-    expect(response.data.users).not.toBe(undefined);
-    expect(response.data.users.length).toBe(4);
+    expect(response.users).not.toBe(undefined);
+    expect(response.users.length).toBe(4);
   });
   test('test getUser with email', async () => {
-    mock.onGet().reply(200, {
+    const mockResponse = {
       id: '1234',
       email: 'foo@bar.com'
-    });
+    };
+    fetch.mockResponse(JSON.stringify(mockResponse));
 
     const conn = _connection.default.init({
-      apiKey: '1234',
-      accessKey: '4321'
+      apiKey: '1234'
     });
 
     const response = await _.default.getUser(conn, undefined, 'foo@bar.com');
-    expect(response.data.id).toBe('1234');
-    expect(response.data.email).toBe('foo@bar.com');
+    expect(response.id).toBe('1234');
+    expect(response.email).toBe('foo@bar.com');
   });
   test('test getUser with id', async () => {
-    mock.onGet().reply(200, {
+    const mockResponse = {
       id: '1111',
       email: 'foo@bar.com'
-    }); // fetch.mockResponse(
-    //   (req) => {
-    //     let syms = Object.getOwnPropertySymbols(req)
-    //     syms.forEach((symbol) => {
-    //       let obj = req[symbol]
-    //       if (obj.parsedURL)
-    //         req = obj
-    //     })
-    //     return new Promise(resolve => setTimeout(() => resolve(JSON.stringify({ req: req, response: mockResponse })), 100))
-    //   }
-    // )
+    };
+    fetch.mockResponse(req => {
+      const syms = Object.getOwnPropertySymbols(req);
+      syms.forEach(symbol => {
+        const obj = req[symbol];
 
-    const conn = _connection.default.init({
-      apiKey: '1234',
-      accessKey: '4321'
+        if (obj.parsedURL) {
+          req = obj;
+        }
+      });
+      return new Promise(resolve => setTimeout(() => resolve(JSON.stringify({
+        req: req,
+        response: mockResponse
+      })), 100));
     });
 
-    const response = await _.default.getUser(conn, '1111'); // const response = result.response
+    const conn = _connection.default.init({
+      apiKey: '1234'
+    });
 
-    console.log('response', response);
-    expect(response.data.id).toBe('1111');
-    expect(response.data.email).toBe('foo@bar.com');
-    expect(response.request.responseURL).toContain('user?id=1111');
+    const result = await _.default.getUser(conn, '1111');
+    const response = result.response; // console.log(result)
+
+    expect(response.id).toBe('1111');
+    expect(response.email).toBe('foo@bar.com');
+    expect(result.req.parsedURL.query).toBe('id=1111');
   });
   test('test getUser with no email or id', async () => {
-    mock.onGet().reply(200, {
+    const mockResponse = {
       id: '1234',
       email: 'foo@bar.com'
-    }); // fetch.mockResponse(JSON.stringify(mockResponse))
+    };
+    fetch.mockResponse(JSON.stringify(mockResponse));
 
     const conn = _connection.default.init({
-      apiKey: '1234',
-      accessKey: '4321'
+      apiKey: '1234'
     });
 
     try {
