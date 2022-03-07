@@ -35,8 +35,8 @@ const connection = {
   * @return {object} the initialized connection object
   */
   init: function (params) {
-    if (params.environment) {
-      this.environment = params.environment;
+    if (params && params.environment) {
+      this.environment = requests[params.environment];
     }
 
     if (params && params.accessKey && params.apiKey) {
