@@ -33,8 +33,8 @@ const connection = {
   * @return {object} the initialized connection object
   */
   init: function (params) {
-    if (params) {
-      this.environment = params.environment || requests[ENVIRONMENT_TYPES.STAGING]
+    if (params.environment) {
+      this.environment = params.environment
     }
     if (params && (params.accessKey && params.apiKey)) {
       this.accessKey = params.accessKey

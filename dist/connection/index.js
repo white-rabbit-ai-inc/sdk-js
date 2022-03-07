@@ -36,7 +36,7 @@ const connection = {
   */
   init: function (params) {
     if (params.environment) {
-      this.environment = params.environment
+      this.environment = params.environment;
     }
 
     if (params && params.accessKey && params.apiKey) {
